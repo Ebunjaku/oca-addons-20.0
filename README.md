@@ -35,6 +35,7 @@ merged, from its open pull request.
 | `currency_rate_update` | [OCA/currency#238](https://github.com/OCA/currency/pull/238) |
 | `mis_builder` | [OCA/mis-builder#842](https://github.com/OCA/mis-builder/pull/842) |
 | `mis_builder_budget` | [OCA/mis-builder#853](https://github.com/OCA/mis-builder/pull/853) |
+| `partner_statement` | [OCA/account-financial-reporting#1598](https://github.com/OCA/account-financial-reporting/pull/1598) |
 | `purchase_analytic` | [OCA/account-analytic#985](https://github.com/OCA/account-analytic/pull/985) |
 | `report_xlsx` | [OCA/reporting-engine#1203](https://github.com/OCA/reporting-engine/pull/1203) |
 | `report_xlsx_helper` | [OCA/reporting-engine#1214](https://github.com/OCA/reporting-engine/pull/1214) |
