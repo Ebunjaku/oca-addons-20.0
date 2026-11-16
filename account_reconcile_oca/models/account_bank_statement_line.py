@@ -1250,7 +1250,13 @@ class AccountBankStatementLine(models.Model):
     def action_to_check(self):
         self.ensure_one()
         self.move_id.write({"review_state": "todo"})
-        if self.can_reconcile and self.journal_id.reconcile_mode == "edit":
+        # A line that is reconciled already only gets the flag: reconciling it
+        # again would rewrite its counterpart lines without their matching.
+        if (
+            not self.is_reconciled
+            and self.can_reconcile
+            and self.journal_id.reconcile_mode == "edit"
+        ):
             self.reconcile_bank_line()
 
     def action_checked(self):

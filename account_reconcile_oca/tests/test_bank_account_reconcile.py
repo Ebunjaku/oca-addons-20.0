@@ -813,6 +813,15 @@ class TestReconciliationWidget(TestAccountReconciliationCommon):
         bank_stmt_line.action_checked()
         self.assertTrue(bank_stmt_line.is_reconciled)
         self.assertNotIn(bank_stmt_line.review_state, ("todo", "anomaly"))
+        # To Check on a line reconciled already: only the flag, the invoice
+        # stays matched with the same journal items
+        self.assertTrue(receivable1.full_reconcile_id)
+        lines = bank_stmt_line.move_id.line_ids
+        bank_stmt_line.action_to_check()
+        self.assertIn(bank_stmt_line.review_state, ("todo", "anomaly"))
+        self.assertEqual(bank_stmt_line.move_id.line_ids, lines)
+        self.assertTrue(receivable1.full_reconcile_id)
+        self.assertEqual(inv1.payment_state, "paid")
 
     def test_reconcile_invoice_to_check_not_reconciled(self):
         """
