@@ -20,6 +20,7 @@ export class ReconcileFormController extends FormController {
     }
     async reloadFormController() {
         var is_reconciled = this.model.root.data.is_reconciled;
+        const reviewState = this.model.root.data.review_state;
         var forceRefresh = false;
         const journalId = this.model.root.data.journal_id;
         try {
@@ -53,6 +54,20 @@ export class ReconcileFormController extends FormController {
             }
             // Refreshing
             this.env.parentController.selectRecord();
+        } else if (
+            this.env.parentController &&
+            reviewState !== this.model.root.data.review_state
+        ) {
+            // To Check / Set as Checked: the card of the list shows the flag at
+            // once. The line stays selected, unless the filter in force no
+            // longer shows it.
+            const parent = this.env.parentController;
+            await parent.model.root.load();
+            render(parent, true);
+            const resId = this.model.root.resId;
+            if (!parent.model.root.records.some((record) => record.resId === resId)) {
+                parent.selectRecord();
+            }
         }
     }
 }

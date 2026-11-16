@@ -122,7 +122,8 @@ export class ReconcileController extends KanbanController {
         } else if (record === undefined) {
             var candidates = this.model.root.records.filter(
                 (modelRecord) =>
-                    !modelRecord.data.is_reconciled || modelRecord.data.to_check
+                    !modelRecord.data.is_reconciled ||
+                    ["todo", "anomaly"].includes(modelRecord.data.review_state)
             );
             if (candidates.length === 0) {
                 candidates = this.model.root.records;
